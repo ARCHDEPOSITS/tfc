@@ -129,8 +129,8 @@
     </div>
 
     <!-- Firebase Authentication Script -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
 
     <script>
         // Firebase configuration
@@ -148,17 +148,13 @@
         firebase.initializeApp(firebaseConfig);
 
         // Show login panel
-        const loginButton = document.getElementById('login');
-        loginButton.addEventListener('click', function() {
-            console.log('Login button clicked'); // Debugging
+        document.getElementById('login').addEventListener('click', function() {
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('loginPanel').style.display = 'block';
         });
 
         // Hide login panel when clicking outside
-        const overlay = document.getElementById('overlay');
-        overlay.addEventListener('click', function() {
-            console.log('Overlay clicked'); // Debugging
+        document.getElementById('overlay').addEventListener('click', function() {
             document.getElementById('overlay').style.display = 'none';
             document.getElementById('loginPanel').style.display = 'none';
         });
