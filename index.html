@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFC - Taco FC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #title {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        #subtext {
+            font-size: 24px;
+            color: #bbb;
+        }
+
+        #login {
+            cursor: pointer;
+        }
+
+        /* Login Panel Styles */
+        #loginPanel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #1c1c1c;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        #loginPanel h2 {
+            margin-top: 0;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+        }
+
+        #loginPanel input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #loginPanel button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Dark Overlay */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 999;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="tfc">TFC - Taco FC</div>
+        <div id="login">Login</div>
+    </header>
+
+    <div id="title">TFC - Taco FC</div>
+    <div id="subtext">Your journey starts here</div>
+
+    <!-- Dark Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Login Panel -->
+    <div id="loginPanel">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Firebase Authentication Script -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBnYpyNuQ_ff7v5LeoZZwJbjdAa2VcsFE",
+            authDomain: "tset-9e3d0.firebaseapp.com",
+            projectId: "tset-9e3d0",
+            storageBucket: "tset-9e3d0.appspot.com",
+            messagingSenderId: "328152190837",
+            appId: "1:328152190837:web:7845175733963ac46d4d3c",
+            measurementId: "G-JN1W16WGZF"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Show login panel
+        document.getElementById('login').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('loginPanel').style.display = 'block';
+        });
+
+        // Hide login panel when clicking outside
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('loginPanel').style.display = 'none';
+        });
+
+        // Login function
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    alert('Login successful!');
+                    document.getElementById('overlay').style.display = 'none';
+                    document.getElementById('loginPanel').style.display = 'none';
+                })
+                .catch((error) => {
+                    alert('Login failed: ' + error.message);
+                });
+        }
+    </script>
+</body>
+</html>
