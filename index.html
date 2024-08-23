@@ -145,17 +145,20 @@
         };
 
         // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        firebase.initializeApp(firebaseConfig);
 
         // Show login panel
-        document.getElementById('login').addEventListener('click', function() {
+        const loginButton = document.getElementById('login');
+        loginButton.addEventListener('click', function() {
+            console.log('Login button clicked'); // Debugging
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('loginPanel').style.display = 'block';
         });
 
         // Hide login panel when clicking outside
-        document.getElementById('overlay').addEventListener('click', function() {
+        const overlay = document.getElementById('overlay');
+        overlay.addEventListener('click', function() {
+            console.log('Overlay clicked'); // Debugging
             document.getElementById('overlay').style.display = 'none';
             document.getElementById('loginPanel').style.display = 'none';
         });
@@ -165,7 +168,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            auth.signInWithEmailAndPassword(email, password)
+            firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed in
                     alert('Login successful!');
