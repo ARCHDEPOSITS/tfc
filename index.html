@@ -13,7 +13,8 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            background-color: #121212;
+            background: url('images (10).jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
         }
@@ -145,7 +146,8 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
 
         // Show login panel
         document.getElementById('login').addEventListener('click', function() {
@@ -164,12 +166,10 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            firebase.auth().signInWithEmailAndPassword(email, password)
+            auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed in
-                    alert('Login successful!');
-                    document.getElementById('overlay').style.display = 'none';
-                    document.getElementById('loginPanel').style.display = 'none';
+                    window.location.href = 'https://auth.novacore.app/tfc';
                 })
                 .catch((error) => {
                     alert('Login failed: ' + error.message);
